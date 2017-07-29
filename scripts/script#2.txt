@@ -1,0 +1,11 @@
+C = LOAD '/home/edureka/Airline/Input_files/routes.dat' USING PigStorage(',') As (Airline:chararray, AirlineID:int, Sourceairport:chararray, SourceairportID:int, Destinationairport:chararray, DestinationairportID:int, Codeshare:chararray, Stops:int, Equipment:chararray);
+
+D = LOAD '/home/edureka/Airline/Input_files/Final_airlines' USING PigStorage(',') As (Airlineid:int, Name:chararray, Alias:chararray, IATA:chararray, ICAO:chararray, Callsign:chararray, Country:chararray,  Active:chararray);
+
+E = FILTER C BY Stops == 0 ;
+
+F = JOIN D BY Airlineid, E BY AirlineID ;
+
+G = FOREACH F GENERATE E::Airline , D::Airlineid, E::Sourceairport , E::SourceairportID , E::Destinationairport, E::DestinationairportID , E::Codeshare , E::Stops , D::Name , D::Alias , D::Country; 
+
+STORE G INTO '/home/edureka/Airline/Output_2';

@@ -1,0 +1,5 @@
+A = LOAD '/home/edureka/Airline/Input_files/airports_mod.dat' USING PigStorage(',') As (AirportID:int, AirportName:chararray, City:chararray, Country:chararray, IATA:chararray, FAA:chararray, Latitude:float, Longitude:float, Altitude:int, Timezone:float, DST:chararray, Tz:chararray);
+
+B = FILTER A BY Country == 'India' ;
+
+STORE B INTO '/home/edureka/Airline/Output_1';

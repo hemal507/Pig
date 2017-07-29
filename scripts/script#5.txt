@@ -1,0 +1,5 @@
+R = LOAD '/home/edureka/Airline/Input_files/Final_airlines' USING PigStorage(',') As (Airline:int, Name:chararray, Alias:chararray, IATA:chararray, ICAO:chararray, Callsign:chararray, Country:chararray,  Active:chararray);
+
+S = FILTER R BY Active == 'Y' ;
+
+STORE S INTO '/home/edureka/Airline/Output_5';
